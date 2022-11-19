@@ -59,11 +59,31 @@ def deleteTask(id : int, session : Session = Depends(get_session)):
 # Mark as Completed
 @app.put('/completed/{id}')
 def completeATask(id : int, session : Session = Depends(get_session)):
-    taskObject = session.query(models.Tasks).get(id)
-    taskObject.completed_task = True
-    session.commit()
-    return taskObject
+    try:
+        taskObject = session.query(models.Tasks).get(id)
+        taskObject.completed_task = True
+        session.commit()
+        return taskObject
+    
+    except SQLAlchemyError as e:
+        return 'Something went wrong',  str(e.__doc__)
 
+# List of Completed Tasks
+@app.get('/completed')
+def completedTasks(session : Session = Depends(get_session)):
+    try:
+        taskObject = session.query(models.Tasks).filter(models.Tasks.completed_task == True).all()
+        return taskObject
+    
+    except SQLAlchemyError as e:
+        return 'Something went wrong',  str(e.__doc__)
 
+# List of Pending Taks
+@app.get('/pending')
+def pendingTasks(session : Session = Depends(get_session)):
+    try:
+        taskObject = session.query(models.Tasks).filter(models.Tasks.completed_task == False).all()
+        return taskObject
 
-
+    except SQLAlchemyError as e:
+        return 'Something went wrong',  str(e.__doc__)
