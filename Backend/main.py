@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response, status
 import schemas
 import models
 
@@ -21,69 +21,142 @@ app = FastAPI()
 
 # Get All Tasks
 @app.get('/')
-def getTasks(session : Session = Depends(get_session)):
+def getTasks(response : Response, session : Session = Depends(get_session)):
     try:
         taskObject = session.query(models.Tasks).all()
-        return taskObject
+        
+        return {
+            'success' : True,
+            'data' : taskObject
+          }
     
     except SQLAlchemyError as e:
-        return 'Something went wrong',  str(e.__doc__)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
+        
 
 # Add a Task
 @app.post('/')
-def addTask(task : schemas.Tasks, session : Session = Depends(get_session)):
+def addTask(task : schemas.Tasks, response : Response, session : Session = Depends(get_session)):
     try:
         taskObject = models.Tasks(current_task = task.current_task)
         session.add(taskObject)
         session.commit()
         session.refresh(taskObject)
-        return taskObject  
+
+        response.status_code = status.HTTP_201_CREATED
+        return {
+            'success' : True,
+            'data' : taskObject,
+            
+        }
 
     except SQLAlchemyError as e:
-        return 'Something went wrong',  str(e.__doc__)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
 
 #Delete a Task
 @app.delete('/{id}')
-def deleteTask(id : int, session : Session = Depends(get_session)):
+def deleteTask(id : int,  response : Response ,session : Session = Depends(get_session)):
     try:
         taskObject = session.query(models.Tasks).get(id)
+        
+        if not taskObject:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return {
+                'success' : False,
+                'error' : f"Task with id: {id} was not found"
+            }
+        
         session.delete(taskObject)
         session.commit()
         session.close()
-        return 'Task has been deleted'
+
+        return {
+            'success' : True,
+            'msg' : 'Task has been deleted'
+        }
     
     except SQLAlchemyError as e:
-        return 'Please enter correct task id'
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
 
 
 # Mark as Completed
 @app.put('/completed/{id}')
-def completeATask(id : int, session : Session = Depends(get_session)):
+def completeATask(id : int, response : Response, session : Session = Depends(get_session)):
     try:
         taskObject = session.query(models.Tasks).get(id)
+
+        if not taskObject:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return {
+                'success' : False,
+                'error' : f"Task with id: {id} was not found"
+            }
+            
         taskObject.completed_task = True
         session.commit()
-        return taskObject
+        
+        return {
+            'success' : True,
+            'data' : taskObject,
+        }
     
     except SQLAlchemyError as e:
-        return 'Something went wrong',  str(e.__doc__)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
 
 # List of Completed Tasks
 @app.get('/completed')
-def completedTasks(session : Session = Depends(get_session)):
+def completedTasks(response : Response, session : Session = Depends(get_session)):
     try:
         taskObject = session.query(models.Tasks).filter(models.Tasks.completed_task == True).all()
-        return taskObject
+        
+        return {
+            'success' : True,
+            'data' : taskObject
+          }
     
     except SQLAlchemyError as e:
-        return 'Something went wrong',  str(e.__doc__)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
 
 # List of Pending Taks
 @app.get('/pending')
-def pendingTasks(session : Session = Depends(get_session)):
+def pendingTasks(response : Response, session : Session = Depends(get_session)):
     try:
         taskObject = session.query(models.Tasks).filter(models.Tasks.completed_task == False).all()
-        return taskObject
+        
+        return {
+            'success' : True,
+            'data' : taskObject
+          }
 
     except SQLAlchemyError as e:
-        return 'Something went wrong',  str(e.__doc__)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            'success' : False,
+            'msg' : 'Something went wrong',
+            'error' : str(e.__doc__)
+        }
