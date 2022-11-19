@@ -22,30 +22,48 @@ app = FastAPI()
 # Get All Tasks
 @app.get('/')
 def getTasks(session : Session = Depends(get_session)):
-    taskObject = session.query(models.Tasks).all()
-    return taskObject
+    try:
+        taskObject = session.query(models.Tasks).all()
+        return taskObject
+    
+    except SQLAlchemyError as e:
+        return 'Something went wrong',  str(e.__doc__)
 
 # Add a Task
 @app.post('/')
 def addTask(task : schemas.Tasks, session : Session = Depends(get_session)):
-    taskObject = models.Tasks(current_task = task.current_task)
-    session.add(taskObject)
-    session.commit()
-    session.refresh(taskObject)
-    return taskObject   
+    try:
+        taskObject = models.Tasks(current_task = task.current_task)
+        session.add(taskObject)
+        session.commit()
+        session.refresh(taskObject)
+        return taskObject  
+
+    except SQLAlchemyError as e:
+        return 'Something went wrong',  str(e.__doc__)
 
 #Delete a Task
 @app.delete('/{id}')
 def deleteTask(id : int, session : Session = Depends(get_session)):
     try:
-        itemObject = session.query(models.Tasks).get(id)
-        session.delete(itemObject)
+        taskObject = session.query(models.Tasks).get(id)
+        session.delete(taskObject)
         session.commit()
         session.close()
         return 'Task has been deleted'
     
     except SQLAlchemyError as e:
         return 'Please enter correct task id'
+
+
+# Mark as Completed
+@app.put('/completed/{id}')
+def completeATask(id : int, session : Session = Depends(get_session)):
+    taskObject = session.query(models.Tasks).get(id)
+    taskObject.completed_task = True
+    session.commit()
+    return taskObject
+
 
 
 
