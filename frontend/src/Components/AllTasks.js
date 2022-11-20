@@ -3,7 +3,7 @@ import { getTasks } from '../redux/actions/getTasksActions';
 import './AllTasks.css'
 import {useSelector, useDispatch} from 'react-redux';
 
-function AllTasks(props) {
+function AllTasks() {
 
     const [createdDate, setCreatedDate] = useState([])
 
