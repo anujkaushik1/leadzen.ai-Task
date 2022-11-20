@@ -43,7 +43,7 @@ function PendingTasks() {
                     <table class="table">
                         <thead >
                             <tr>
-                                <th scope='col'>S.No.</th>
+                                <th scope='col'>Task no.</th>
                                 <th scope="col" style={{ paddingLeft: '5rem' }}>Task</th>
                                 <th scope="col" ><i class="fas fa-sort-up" />Created At<i class="fas fa-sort-down"> </i></th>
                             </tr>

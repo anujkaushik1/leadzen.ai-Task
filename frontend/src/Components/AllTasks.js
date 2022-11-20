@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getTasks } from '../redux/actions/getTasksActions';
 import './AllTasks.css'
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 
@@ -12,10 +12,10 @@ function AllTasks() {
 
     const dispatch = useDispatch();
     const getTask = useSelector(state => state.getTasks);
-    const {loading, tasks, error} = getTask;
-    
+    const { loading, tasks, error } = getTask;
 
-    const deleteTaskButton = async(task, idx) => {
+
+    const deleteTaskButton = async (task, idx) => {
         try {
             const response = await axios.delete(`http://127.0.0.1:8000/${task.id}`);
             dispatch(getTasks());
@@ -26,30 +26,44 @@ function AllTasks() {
         }
     }
 
-    const addTask = async() => {
-        if(text === ''){
-            return ;
+    const addTask = async () => {
+        if (text === '') {
+            return;
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/', {current_task: text});
+            const response = await axios.post('http://127.0.0.1:8000/', { current_task: text });
             dispatch(getTasks());
             setText('')
             alert('Task has been added')
         } catch (error) {
             console.log(error.message);
-            alert(error.message)   
+            alert(error.message)
         }
     }
 
-    useEffect(()=> {
+    const completedTask = async (id) => {
+        try {
+            const response = await axios.put(`http://127.0.0.1:8000/completed/${id}`);
+
+            response.data.data.completed_task && alert('Task has been completed')
+                
+            
+            dispatch(getTasks());
+        } catch (error) {
+            console.log(error.message);
+            alert(error.message)
+        }
+    }
+
+    useEffect(() => {
         dispatch(getTasks())
 
     }, [dispatch])
 
 
-    useEffect(()=> {
-        if(tasks.length !== 0){
+    useEffect(() => {
+        if (tasks.length !== 0) {
             let arr = [];
             tasks.map((task) => {
                 let completeDate = task.created_date;
@@ -57,18 +71,18 @@ function AllTasks() {
                 arr.push(date[0]);
             })
             setCreatedDate(arr)
-        } 
-       
+        }
+
     }, [tasks])
 
 
-    return (    
+    return (
         <div className='alltasks-main'>
 
             <div className='addtask'>
 
-                <input onChange={(e) => setText(e.target.value)} value = {text} type="text" placeholder='Add Task' />
-                <button onClick={addTask}><span style={{fontWeight : 'bold', fontSize : '17px'}}>+</span></button>
+                <input onChange={(e) => setText(e.target.value)} value={text} type="text" placeholder='Add Task' />
+                <button onClick={addTask}><span style={{ fontWeight: 'bold', fontSize: '17px' }}>+</span></button>
 
             </div>
 
@@ -82,9 +96,10 @@ function AllTasks() {
                     <table class="table">
                         <thead >
                             <tr>
-                                <th scope='col'>S.No.</th>
+                                <th scope='col'>Task No.</th>
                                 <th scope="col" style={{ paddingLeft: '5rem' }}>Task</th>
                                 <th scope="col" ><i class="fas fa-sort-up" />Created At<i class="fas fa-sort-down"> </i></th>
+                                <th scope="col" >Status</th>
                             </tr>
                         </thead>
                         {
@@ -96,7 +111,12 @@ function AllTasks() {
                                             <td>{task.id}</td>
                                             <td style={{ paddingLeft: '5rem' }}>{task.current_task}</td>
                                             <td style={{ paddingLeft: '20px' }}>{createdDate[idx]}</td>
-                                            <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm " onClick={()=> deleteTaskButton(task, idx)}>Delete</button></td>
+                                            <td>
+                                                <div style={{ paddingLeft: '2rem' }} class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked={task.completed_task} onChange={() => completedTask(task.id)} />
+                                                </div>
+                                            </td>
+                                            <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm " onClick={() => deleteTaskButton(task, idx)}>Delete</button></td>
                                         </tr>
                                     ))
                                 }
