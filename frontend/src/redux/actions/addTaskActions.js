@@ -15,14 +15,21 @@ const addTaskFail = (err) => {
     }
 }
 
-const addTaskSucc = () => {
+const addTaskSucc = (task) => {
     return {
-        type : addTaskAction.ADD_TASK_SUCCESS
+        type : addTaskAction.ADD_TASK_SUCCESS,
+        payload : task
     }
 }
 
 const removeError = () => {
     return {
         type : addTaskAction.REMOVE_ERROR
+    }
+}
+
+export const addTask = (task) => {
+    return (disptach, getState) => {
+        
     }
 }
