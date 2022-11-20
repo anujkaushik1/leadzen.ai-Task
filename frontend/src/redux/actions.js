@@ -1,0 +1,7 @@
+export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
+export const MARK_COMPLETED = 'MARK_COMPLETED';
+export const GET_ALL_TASKS = 'GET_ALL_TASKS';
+export const GET_ALL_COMPLETED_TASKS = 'GET_ALL_COMPLETED_TASKS';
+export const GET_ALL_PENDING_TASKS = 'GET_ALL_PENDING_TASKS';
+
