@@ -1,4 +1,5 @@
 {
-    "tasks" : null,
+    "tasks" : [],
+    "loading" : false,
     "error" : ""
 }

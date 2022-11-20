@@ -4,19 +4,30 @@ import initalState from './initialState.json';
 const getTasksReducer = (state = initalState, action) => {
 
     switch(action.type){
+       
+       case getTaskActions.GET_ALL_TASKS_REQ:
+         return {
+            ...state,
+            loading : true,
+            tasks : []
+         }
+
        case getTaskActions.GET_ALL_COMPLETED_TASKS_SUCCESS:
         return {
             ...state,
+            loading : false,
             error : "",
-            task : action.payload
+            tasks : action.payload
         }
 
         case getTaskActions.GET_ALL_COMPLETED_TASKS_FAILED:
             return {
                 ...state,
-                error : action.payload
+                loading : false,
+                error : action.payload,
+                tasks : []
             }
-            
+
         default :
             return state;
     }

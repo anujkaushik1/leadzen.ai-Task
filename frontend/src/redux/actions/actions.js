@@ -1,5 +1,6 @@
 // Get all tasks
 export const GET_ALL_TASKS_FAILED = 'GET_ALL_TASKS_FAILED';
+export const GET_ALL_TASKS_REQ = 'GET_ALL_TASKS_REQ';
 export const GET_ALL_TASKS_SUCCESS = 'GET_ALL_TASKS_SUCCESS';
 
 // Get all completed tasks
