@@ -1,7 +1,20 @@
 {
-    "addtask": {
-        "task": null,
-        "loading": false,
-        "error": ""
+    "get_all_tasks" : {
+        "tasks" : null,
+        "loading" : false,
+        "error" : ""
+    },
+
+    "get_completed_tasks" : {
+        "completedTasks" : null,
+        "loading" : false,
+        "error" : ""
+    },
+
+    
+    "get_pending_tasks" : {
+        "pendingTasks" : null,
+        "loading" : false,
+        "error" : ""
     }
 }
