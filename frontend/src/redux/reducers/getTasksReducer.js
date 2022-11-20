@@ -12,7 +12,7 @@ const getTasksReducer = (state = initalState, action) => {
             tasks : []
          }
 
-       case getTaskActions.GET_ALL_TASKS_SUCCESS:
+       case getTaskActions.GET_ALL_COMPLETED_TASKS_SUCCESS:
         return {
             ...state,
             loading : false,
@@ -20,7 +20,7 @@ const getTasksReducer = (state = initalState, action) => {
             tasks : action.payload
         }
 
-        case getTaskActions.GET_ALL_TASKS_FAILED:
+        case getTaskActions.GET_ALL_COMPLETED_TASKS_FAILED:
             return {
                 ...state,
                 loading : false,
