@@ -11,6 +11,10 @@ function AllTasks() {
     const getTask = useSelector(state => state.getTasks);
     const {loading, tasks, error} = getTask;
 
+    const deleteTask = (task, idx) => {
+        
+    }
+
     useEffect(()=> {
         dispatch(getTasks())
 
@@ -57,7 +61,7 @@ function AllTasks() {
                                             <td>{task.id}</td>
                                             <td style={{ paddingLeft: '5rem' }}>{task.current_task}</td>
                                             <td style={{ paddingLeft: '20px' }}>{createdDate[idx]}</td>
-                                            <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm ">Delete</button></td>
+                                            <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm " onClick={()=> deleteTask(task, idx)}>Delete</button></td>
                                         </tr>
                                     ))
                                 }

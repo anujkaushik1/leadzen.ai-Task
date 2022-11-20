@@ -57,7 +57,6 @@ function PendingTasks() {
                                             <td>{task.id}</td>
                                             <td style={{ paddingLeft: '5rem' }}>{task.current_task}</td>
                                             <td style={{ paddingLeft: '20px' }}>{createdDate[idx]}</td>
-                                            <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm ">Delete</button></td>
                                         </tr>
                                     ))
                                 }
