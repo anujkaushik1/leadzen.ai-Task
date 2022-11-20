@@ -1,0 +1,19 @@
+.navbar-comp{
+    display: flex;
+    justify-content: center
+}
+
+.navbar-comp h4{
+    color: #0D6EFD;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+#all_tasks{
+    margin-right: 2rem;
+}
+
+#completed_tasks{
+    margin-right: 2rem;
+
+}
