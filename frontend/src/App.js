@@ -8,6 +8,7 @@ import rootReducer from './redux/reducers/rootReducer';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import PendingTasks from './Components/PendingTasks';
 
 
 const reduxStore = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
@@ -19,6 +20,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<AllTasks />} />
+          <Route path='/pending' element = {<PendingTasks/>}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>

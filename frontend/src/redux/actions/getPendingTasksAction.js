@@ -21,7 +21,7 @@ const pendingTaskSucc = (task) => {
     }
 }
 
-export const getTasks = () => {
+export const getPendingTasks = () => {
 
     return async function(dispatch, getState) {
 
