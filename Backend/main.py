@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 import schemas
 import models
 
@@ -18,6 +19,15 @@ def get_session():
         session.close()
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Get All Tasks
 @app.get('/')
