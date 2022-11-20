@@ -1,15 +1,9 @@
 import * as getTaskActions from './actions';
 
-
-const allTasksReq = () => {
-    return {
-        type : getTaskActions.GET_ALL_COMPLETED_TASKS_REQUEST
-    }
-}
-
 const allTasksFail = (err) => {
     return {
-        type : getTaskActions.GET_ALL_COMPLETED_TASKS_FAILED
+        type : getTaskActions.GET_ALL_COMPLETED_TASKS_FAILED,
+        payload : err.message
     }
 }
 
@@ -23,7 +17,6 @@ const allTasksSucc = (task) => {
 export const getTasks = () => {
 
     return async(dispatch, getState) => {
-        dispatch(allTasksReq())
         try {
             const response = await axios.get('http://127.0.0.1:8000');
             const data = response.data.data;

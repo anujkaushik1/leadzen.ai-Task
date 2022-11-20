@@ -7,31 +7,6 @@ function AllTasks() {
     const [allTasks, setAllTasks] = useState(null);
     const [createdDate, setCreatedDate] = useState(null)
 
-    useEffect(() => {
-
-        (async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:8000');
-
-                setAllTasks(response.data.data)
-
-                let arr = []
-
-                response.data.data.map((task) => {
-                    let completeDdate = task.created_date;
-                    let date = completeDdate.split('T');
-                    arr.push(date[0])
-                    
-                });
-
-                setCreatedDate(arr)
-                
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-    }, [])
-
     return (
         <div className='alltasks-main'>
             <div className="col-lg-6">
@@ -74,5 +49,8 @@ function AllTasks() {
 
     )
 }
+
+
+
 
 export default AllTasks
