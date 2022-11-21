@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { getPendingTasks } from '../redux/actions/getPendingTasksAction';
-import './PendingTasks.css'
+import { getCompletedTask } from '../redux/actions/getCompletedActions';
+import './CompletedTasks.css'
 import { useSelector, useDispatch } from 'react-redux';
-import Search from './Search';
-import Pagination from './Pagination';
 import { filteringPagination } from '../DRY/filtering_pagination';
+import Pagination from './Pagination';
+import Search from './Search';
 import Table from './Table';
 
+function CompletedTasks() {
 
-function PendingTasks() {
-
-    const [createdDate, setCreatedDate] = useState([]);
+    const [createdDate, setCreatedDate] = useState([])
     const [text, setText] = useState('');
     const [taskArr, setTaskArr] = useState([]);
     const [search, setSearch] = useState('');
@@ -18,16 +17,16 @@ function PendingTasks() {
     const [currPage, setCurrPage] = useState(1)
 
     const dispatch = useDispatch();
-    const getTask = useSelector(state => state.getPendingTasks);
+    const getTask = useSelector(state => state.getCompletedTasks);
     const { loading, tasks, error } = getTask;
 
+
     useEffect(() => {
-        dispatch(getPendingTasks())
+        dispatch(getCompletedTask())
 
     }, [dispatch])
 
     useEffect(() => {
-
         if (tasks.length !== 0) {
             let arr = [];
             tasks.map((task) => {
@@ -37,7 +36,7 @@ function PendingTasks() {
             })
             setCreatedDate(arr)
 
-            setTaskArr(tasks)
+            setTaskArr(tasks);
         }
 
     }, [tasks])
@@ -47,12 +46,11 @@ function PendingTasks() {
 
     [filterTaskArr, pagesArr] = filteringPagination(search, taskArr, limit, currPage);
 
-
     return (
         <div className='completedtasks-main'>
             <div className="col-lg-6">
                 <Search search={search} setSearch={setSearch} limit={limit} setLimit={setLimit} />
-                <Table filterTaskArr={filterTaskArr} createdDate={createdDate} />
+                <Table filterTaskArr = {filterTaskArr} createdDate = {createdDate} />
                 <Pagination pagesArr={pagesArr} setCurrPage={setCurrPage} />
 
             </div>
@@ -62,4 +60,4 @@ function PendingTasks() {
 }
 
 
-export default PendingTasks
+export default CompletedTasks;

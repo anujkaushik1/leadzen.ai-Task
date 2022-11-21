@@ -1,18 +1,18 @@
-import * as getTaskActions from '../actions/actions';
+import * as getCompltedAction from '../actions/actions';
 import initalState from './initialState.json';
 
-const getTasksReducer = (state = initalState, action) => {
+const getCompletedReducer = (state = initalState, action) => {
 
     switch(action.type){
        
-       case getTaskActions.GET_ALL_TASKS_REQ:
+       case getCompltedAction.GET_ALL_COMPLETED_TASKS_REQ:
          return {
             ...state,
             loading : true,
             tasks : []
          }
 
-       case getTaskActions.GET_ALL_TASKS_SUCCESS:
+       case getCompltedAction.GET_ALL_COMPLETED_TASKS_SUCCESS:
         return {
             ...state,
             loading : false,
@@ -20,7 +20,7 @@ const getTasksReducer = (state = initalState, action) => {
             tasks : action.payload
         }
 
-        case getTaskActions.GET_ALL_TASKS_FAILED:
+        case getCompltedAction.GET_ALL_COMPLETED_TASKS_FAILED:
             return {
                 ...state,
                 loading : false,
@@ -33,4 +33,4 @@ const getTasksReducer = (state = initalState, action) => {
     }
 }
 
-export default getTasksReducer;
+export default getCompletedReducer;

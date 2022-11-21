@@ -3,7 +3,7 @@ import * as getTaskActions from './actions';
 
 const allTasksFail = (err) => {
     return {
-        type : getTaskActions.GET_ALL_COMPLETED_TASKS_FAILED,
+        type : getTaskActions.GET_ALL_TASKS_FAILED,
         payload : err.message
     }
 }
@@ -16,7 +16,7 @@ const allTasksReq = () => {
 
 const allTasksSucc = (task) => {
     return {
-        type : getTaskActions.GET_ALL_COMPLETED_TASKS_SUCCESS,
+        type : getTaskActions.GET_ALL_TASKS_SUCCESS,
         payload : task
     }
 }
