@@ -116,8 +116,13 @@ def completeATask(id : int, response : Response, session : Session = Depends(get
                 'success' : False,
                 'error' : f"Task with id: {id} was not found"
             }
-            
-        taskObject.completed_task = True
+        
+        if taskObject.completed_task:
+            taskObject.completed_task = False
+        
+        else:
+            taskObject.completed_task = True
+
         session.commit()
         
         return {
