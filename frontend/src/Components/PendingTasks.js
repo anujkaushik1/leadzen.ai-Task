@@ -9,9 +9,6 @@ import Table from './Table';
 
 
 function PendingTasks() {
-
-    const [createdDate, setCreatedDate] = useState([]);
-    const [text, setText] = useState('');
     const [taskArr, setTaskArr] = useState([]);
     const [search, setSearch] = useState('');
     const [limit, setLimit] = useState(4);
@@ -29,14 +26,6 @@ function PendingTasks() {
     useEffect(() => {
 
         if (tasks.length !== 0) {
-            let arr = [];
-            tasks.map((task) => {
-                let completeDate = task.created_date;
-                let date = completeDate.split('T');
-                arr.push(date[0]);
-            })
-            setCreatedDate(arr)
-
             setTaskArr(tasks)
         }
 

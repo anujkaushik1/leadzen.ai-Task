@@ -9,7 +9,6 @@ import Table from './Table';
 
 function CompletedTasks() {
 
-    const [text, setText] = useState('');
     const [taskArr, setTaskArr] = useState([]);
     const [search, setSearch] = useState('');
     const [limit, setLimit] = useState(4);

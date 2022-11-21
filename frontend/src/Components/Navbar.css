@@ -17,3 +17,10 @@
     margin-right: 2rem;
 
 }
+
+@media screen and (max-width : 425px) {
+    .navbar-comp h4{
+        font-size: 15px;
+        text-align: center;
+    }
+}
