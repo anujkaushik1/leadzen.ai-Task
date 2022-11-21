@@ -115,12 +115,12 @@ function AllTasks() {
                 <Search limit={limit} search = {search} setSearch = {setSearch} setLimit = {setLimit}/>
 
                 <div className="row">
-                    <table class="table">
+                    <table className="table">
                         <thead >
                             <tr>
                                 <th scope='col' id='taskno'>Task No.</th>
                                 <th scope="col" style={{ paddingLeft: '5rem' }} id = 'task'>Task</th>
-                                <th scope="col" id='createddate'><i class="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i class="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
+                                <th scope="col" id='createddate'><i className="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i className="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
                                 <th scope="col" id='status'>Status</th>
                             </tr>
                         </thead>
@@ -133,11 +133,11 @@ function AllTasks() {
                                         <td style={{ paddingLeft: '5rem' }}>{task.current_task}</td>
                                         <td style={{ paddingLeft: '20px' }}>{task.created_date}</td>
                                         <td>
-                                            <div style={{ paddingLeft: '2rem' }} class="form-check">
-                                                <input class="form-check-input" type="checkbox" checked={task.completed_task} onChange={() => completedTask(task.id)} />
+                                            <div style={{ paddingLeft: '2rem' }} className="form-check">
+                                                <input className="form-check-input" type="checkbox" checked={task.completed_task} onChange={() => completedTask(task.id)} />
                                             </div>
                                         </td>
-                                        <td style={{ position: 'relative', bottom: '4px' }}><button type="button" class="btn btn-danger btn-sm " onClick={() => deleteTaskButton(task, idx)}>Delete</button></td>
+                                        <td style={{ position: 'relative', bottom: '4px' }}><button type="button" className="btn btn-danger btn-sm " onClick={() => deleteTaskButton(task, idx)}>Delete</button></td>
                                     </tr>
                                 ))
                             }

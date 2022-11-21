@@ -3,10 +3,10 @@ import React from 'react'
 function Pagination({pagesArr, setCurrPage}) {
     return (
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul className="pagination">
                 {
                     pagesArr.map((page, idx) => (
-                        <li key={idx} class="page-item"><a class="page-link" onClick={() => setCurrPage(page)}>{page}</a></li>
+                        <li key={idx} className="page-item"><a className="page-link" onClick={() => setCurrPage(page)}>{page}</a></li>
                     ))
                 }
 

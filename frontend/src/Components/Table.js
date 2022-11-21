@@ -27,7 +27,7 @@ function Table({ filterTaskArr, taskArr, setTaskArr }) {
           <tr>
             <th scope='col'>Task no.</th>
             <th scope="col" style={{ paddingLeft: '5rem' }}>Task</th>
-            <th scope="col" ><i class="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i class="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
+            <th scope="col" ><i className="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i className="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
           </tr>
         </thead>
 
