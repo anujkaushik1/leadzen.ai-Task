@@ -30,6 +30,12 @@ export const getTasks = () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000');
             const data = response.data.data;
+
+            data.map((task) => {
+                let completeDate = task.created_date;
+                let date = completeDate.split('T');
+                task.created_date = date[0];
+            })        
             
             dispatch(allTasksSucc(data))
             

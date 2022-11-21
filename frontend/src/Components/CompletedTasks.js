@@ -9,7 +9,6 @@ import Table from './Table';
 
 function CompletedTasks() {
 
-    const [createdDate, setCreatedDate] = useState([])
     const [text, setText] = useState('');
     const [taskArr, setTaskArr] = useState([]);
     const [search, setSearch] = useState('');
@@ -28,14 +27,6 @@ function CompletedTasks() {
 
     useEffect(() => {
         if (tasks.length !== 0) {
-            let arr = [];
-            tasks.map((task) => {
-                let completeDate = task.created_date;
-                let date = completeDate.split('T');
-                arr.push(date[0]);
-            })
-            setCreatedDate(arr)
-
             setTaskArr(tasks);
         }
 
@@ -50,7 +41,7 @@ function CompletedTasks() {
         <div className='completedtasks-main'>
             <div className="col-lg-6">
                 <Search search={search} setSearch={setSearch} limit={limit} setLimit={setLimit} />
-                <Table filterTaskArr = {filterTaskArr} createdDate = {createdDate} />
+                <Table filterTaskArr = {filterTaskArr} taskArr = {taskArr} setTaskArr = {setTaskArr} />
                 <Pagination pagesArr={pagesArr} setCurrPage={setCurrPage} />
 
             </div>

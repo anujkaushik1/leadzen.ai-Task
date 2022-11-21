@@ -52,7 +52,7 @@ function PendingTasks() {
         <div className='completedtasks-main'>
             <div className="col-lg-6">
                 <Search search={search} setSearch={setSearch} limit={limit} setLimit={setLimit} />
-                <Table filterTaskArr={filterTaskArr} createdDate={createdDate} />
+                <Table filterTaskArr = {filterTaskArr} taskArr = {taskArr} setTaskArr = {setTaskArr} />
                 <Pagination pagesArr={pagesArr} setCurrPage={setCurrPage} />
 
             </div>

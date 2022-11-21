@@ -15,7 +15,6 @@ export const filteringPagination = (search, taskArr, limit, currPage) => {
     }
 
     let pages = Math.ceil(filterTaskArr.length / limit);
-    console.log(pages);
     let pagesArr = [];
 
     for (let i = 1; i <= pages; i++) 

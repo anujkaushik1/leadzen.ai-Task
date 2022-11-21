@@ -11,8 +11,6 @@ import Search from './Search';
 
 
 function AllTasks() {
-
-    const [createdDate, setCreatedDate] = useState([]);
     const [text, setText] = useState('');
     const [taskArr, setTaskArr] = useState([]);
     const [search, setSearch] = useState('');
@@ -65,6 +63,24 @@ function AllTasks() {
         }
     }
 
+    const sortDatesDesc = () => {
+        let datesArr = [...taskArr];
+        datesArr.sort((a, b) => {
+            return new Date(b.created_date) - new Date(a.created_date)
+        })
+
+        setTaskArr([...datesArr])
+    }
+
+    const sortDatesAsc = () => {
+        let datesArr = [...taskArr];
+        datesArr.sort((a, b) => {
+            return new Date(a.created_date) - new Date(b.created_date)
+        })
+
+        setTaskArr([...datesArr])
+    }
+
     useEffect(() => {
         dispatch(getTasks())
 
@@ -73,14 +89,6 @@ function AllTasks() {
 
     useEffect(() => {
         if (tasks.length !== 0) {
-            let arr = [];
-            tasks.map((task) => {
-                let completeDate = task.created_date;
-                let date = completeDate.split('T');
-                arr.push(date[0]);
-            })
-            setCreatedDate(arr);
-
             setTaskArr(tasks);
         }
 
@@ -112,7 +120,7 @@ function AllTasks() {
                             <tr>
                                 <th scope='col'>Task No.</th>
                                 <th scope="col" style={{ paddingLeft: '5rem' }}>Task</th>
-                                <th scope="col" ><i class="fas fa-sort-up" />Created At<i class="fas fa-sort-down"> </i></th>
+                                <th scope="col" ><i class="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i class="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
                                 <th scope="col" >Status</th>
                             </tr>
                         </thead>
@@ -123,7 +131,7 @@ function AllTasks() {
                                     <tr key={idx}>
                                         <td>{task.id}</td>
                                         <td style={{ paddingLeft: '5rem' }}>{task.current_task}</td>
-                                        <td style={{ paddingLeft: '20px' }}>{createdDate[idx]}</td>
+                                        <td style={{ paddingLeft: '20px' }}>{task.created_date}</td>
                                         <td>
                                             <div style={{ paddingLeft: '2rem' }} class="form-check">
                                                 <input class="form-check-input" type="checkbox" checked={task.completed_task} onChange={() => completedTask(task.id)} />
