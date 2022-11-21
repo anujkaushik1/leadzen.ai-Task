@@ -18,6 +18,6 @@
 ## Command to set up the frontend locally
 **First Step** - `npm i` (To install all dependencies for frontend)
 
-**Second Step** - `npm run` (To run application)
+**Second Step** - `npm start` (To run application)
 
 
