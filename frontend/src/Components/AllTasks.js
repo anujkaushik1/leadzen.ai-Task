@@ -110,7 +110,7 @@ function AllTasks() {
 
             </div>
 
-            <div className="col-lg-6 mt-4" >
+            <div className="col-lg-6 addtask-table col-sm-12" >
                 
                 <Search limit={limit} search = {search} setSearch = {setSearch} setLimit = {setLimit}/>
 
@@ -118,10 +118,10 @@ function AllTasks() {
                     <table class="table">
                         <thead >
                             <tr>
-                                <th scope='col'>Task No.</th>
-                                <th scope="col" style={{ paddingLeft: '5rem' }}>Task</th>
-                                <th scope="col" ><i class="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i class="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
-                                <th scope="col" >Status</th>
+                                <th scope='col' id='taskno'>Task No.</th>
+                                <th scope="col" style={{ paddingLeft: '5rem' }} id = 'task'>Task</th>
+                                <th scope="col" id='createddate'><i class="fas fa-sort-up" onClick={sortDatesDesc} />Created At<i class="fas fa-sort-down" onClick={sortDatesAsc}> </i></th>
+                                <th scope="col" id='status'>Status</th>
                             </tr>
                         </thead>
 

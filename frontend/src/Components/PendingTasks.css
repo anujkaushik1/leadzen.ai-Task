@@ -3,3 +3,16 @@
     justify-content: center;
     margin-top: 4rem
 }
+
+.pendingtask-table{
+    padding: 1rem;
+    overflow: auto;
+    position: relative;
+}
+
+@media screen and (max-width : 425px) {
+    .pendingtask-table {
+        left: 20px;
+    }
+
+}

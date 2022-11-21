@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 4rem
+    margin-top: 4rem;
 }
 
 .addtask input, .addtask button{
@@ -34,12 +34,22 @@
     justify-content: center;
 }
 
+.addtask-table{
+    padding: 2rem;
+    overflow: auto;
+    position: relative;
+}
+
+
 @media screen and (max-width : 425px) {
     .search{
         width: 50%;
-        display: flex;
-        justify-content: space-around;
-        margin-left: 30px;
+        margin-left: 70px;
     }
+
+    .addtask-table{
+        left: 40px;
+    }
+
 }
 

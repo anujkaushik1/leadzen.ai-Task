@@ -1,5 +1,18 @@
-.completedtasks-main{
+.completedtasks-main {
     display: flex;
     justify-content: center;
     margin-top: 4rem
+}
+
+.completedtask-table{
+    overflow: auto;
+    padding: 1rem;
+    position: relative;
+}
+
+@media screen and (max-width : 425px) {
+    .completedtask-table {
+        left: 20px;
+    }
+
 }

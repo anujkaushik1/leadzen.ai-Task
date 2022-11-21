@@ -1,5 +1,4 @@
 import React from 'react'
-
 function Search({search, setSearch, limit, setLimit}) {
     return (
         <div className="row search">
